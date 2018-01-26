@@ -30,7 +30,8 @@ public class Magpie3
 	public String getResponse(String statement)
 	{
 		String response = "";
-		if (statement.length() == 0)
+		String newStatement = statement.trim();
+		if (newStatement.length() == 0)
 		{
 			response = "Say something, please.";
 		}
@@ -44,6 +45,33 @@ public class Magpie3
 				|| findKeyword(statement, "brother") >= 0)
 		{
 			response = "Tell me more about your family.";
+		}else if((findKeyword(statement, "dog"))>=0 || (findKeyword(statement, "cat"))>=0)
+		{
+			response = "Tell me more about your pets.";
+		}	
+		else if(findKeyword(statement, "Mr")>=0)
+		{
+			response = "He sounds like a great teacher!";
+		}
+		else if((findKeyword(statement, "Mrs"))>=0 || (findKeyword(statement, "Ms"))>=0 || (findKeyword(statement, "Miss"))>=0)
+		{
+			response = "She sounds like a really nice teacher!";
+		}
+		else if((findKeyword(statement, "hungry"))>=0 || (findKeyword(statement, "food"))>=0)
+		{
+			response = "Now you're making me hungry.";
+		}
+		else if((findKeyword(statement, "tired"))>=0||(findKeyword(statement, "sleep"))>=0)
+		{
+			response = "8 hours of sleep at night sounds like something you need!";
+		}
+		else if(findKeyword(statement, "school")>=0)
+		{
+			response = "Yeah, I hate school too. But comp sci is really fun!";
+		}
+		else if(findKeyword(statement, "hello")>=0||findKeyword(statement, "hi")>=0)
+		{
+			response = "Hello! Today is gonna be a great day!";
 		}
 		else
 		{
@@ -74,12 +102,10 @@ public class Magpie3
 		String phrase = statement.trim().toLowerCase();
 		goal = goal.toLowerCase();
 
-		// The only change to incorporate the startPos is in
-		// the line below
+		// The only change to incorporate the startPos is in the line below
 		int psn = phrase.indexOf(goal, startPos);
 
-		// Refinement--make sure the goal isn't part of a
-		// word
+		// Refinement--make sure the goal isn't part of a word
 		while (psn >= 0)
 		{
 			// Find the string of length 1 before and after
@@ -96,13 +122,9 @@ public class Magpie3
 						psn + goal.length() + 1);
 			}
 
-			// If before and after aren't letters, we've
-			// found the word
-			if (((before.compareTo("a") < 0) || (before
-					.compareTo("z") > 0)) // before is not a
-											// letter
-					&& ((after.compareTo("a") < 0) || (after
-							.compareTo("z") > 0)))
+			// If before and after aren't letters, we've found the word
+			if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0)) // before is not a letter
+					&& ((after.compareTo("a") < 0) || (after.compareTo("z") > 0)))
 			{
 				return psn;
 			}
@@ -168,3 +190,5 @@ public class Magpie3
 	}
 
 }
+
+
